@@ -4,10 +4,10 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. DNI
-b. Carnet de Extranjeria
-c. Pasaporte
-d. Tarjeta de Residencia
+1 - DNI
+2 - Carnet de Extranjeria
+3 - Pasaporte
+4 - Tarjeta de Residencia
 ```
 
 # new_idiomas_person
@@ -38,13 +38,13 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. Coordinador 
-b. Docente 
-c. Programador 
-d. Asesor 
-e. Asistente
-f. Estudiante
-e. Consultor de certificados
+1 - Coordinador 
+2 - Docente 
+3 - Programador 
+4 - Asesor 
+5 - Asistente
+6 - Estudiante
+7 - Consultor de certificados
 ```
 
 # new_idiomas_teacher
@@ -59,8 +59,8 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. Activo
-b. Inactivo 
+1 - Activo
+2 - Inactivo 
 ```
 
 # new_idiomas_teacher_language
@@ -86,8 +86,8 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. Activo
-b. Inactivo 
+1 - Activo
+2 - Inactivo 
 ```
 
 # new_idiomas_faculty
@@ -96,8 +96,9 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. 1 - Medicina
-b. 2 - Derecho y ciencias politicas
+1 - Medicina
+2 - Derecho y ciencias politicas
+...
 ```
 
 # new_idiomas_postgraduate_program
@@ -105,10 +106,24 @@ b. 2 - Derecho y ciencias politicas
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+201 - Segunda Especialidad en Medicina Humana
+202 - Segunda Especialidad en Enfermería
+...
+```
+
 # new_idiomas_postgraduate_permanency
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - Activo
+2 - Egresado
+3 - Reserva de ingreso
+4 - Inactivo
+5 - Abandono
+```
 
 # countries
 
@@ -116,8 +131,8 @@ id                    //INT
 name                  //VARCHAR(100)
 
 ```
-a. 9233 - Peru
-b. 9234 - Bolivia
+9233 - Peru
+9234 - Bolivia
 ```
 
 # new_idiomas_language
@@ -125,25 +140,62 @@ b. 9234 - Bolivia
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Inglés
+2 - Portugués
+3 - Italiano
+4 - Francés
+5 - Quechua
+6 - Aymara
+```
+
 # new_idiomas_program
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - Regular
+2 - Repaso
+3 - Intensivo
+```
 
 # new_idiomas_level
 
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Básico
+2 - Intermedio
+3 - Avanzado
+```
+
 # new_idiomas_day
 
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Lunes
+2 - Martes
+3 - Miércoles
+4 - Jueves
+5 - Viernes
+6 - Sábado
+7 - Domingo
+```
+
 # new_idiomas_section
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - A
+2 - B
+3 - C
+```
 
 # new_idiomas_max_cycle_per_language_level
 
@@ -155,6 +207,14 @@ max_cycle            //INT
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - En matrícula
+2 - En curso
+3 - Inhabilitado
+4 - Cerrado
+5 - En matrícula interna
+```
 
 # new_idiomas_course
 
@@ -192,10 +252,22 @@ payment_state_id      //INT
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - AgentesBCP
+2 - Yape
+3 - Banca Móvil
+```
+
 # new_idiomas_payment_state
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - En revisión
+2 - Aprobado
+3 - Rechazado
+```
 
 # new_idiomas_course_enrollment_request
 
@@ -213,6 +285,13 @@ state_id                //INT
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Pendiente
+2 - Aprobada
+3 - Rechazada
+4 - Rezagada
+```
+
 # new_idiomas_course_student
 
 course_id             //INT
@@ -223,6 +302,13 @@ state_id              //INT
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - Matriculado
+2 - Alumno libre
+3 - Rezagado
+4 - Retirado
+```	
 
 # new_idiomas_course_student_score
 
@@ -253,6 +339,11 @@ created_by            //INT
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Pendiente
+2 - Completada
+```
+
 # new_idiomas_exam
 
 id                     //INT
@@ -273,10 +364,22 @@ created_by             //INT
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Ordinario
+2 - Extraordinario
+```
+
 # new_idiomas_exam_state
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - En Inscripción
+2 - En Curso
+3 - Inhabilitado
+4 - Finalizado
+```
 
 # new_idiomas_exam_enrollment_request
 
@@ -294,6 +397,13 @@ state_id                //INT
 id                    //INT
 name                  //VARCHAR(100)
 
+```
+1 - Pendiente
+2 - Aprobada
+3 - Rechazada
+4 - Rezagada
+```
+
 # new_idiomas_exam_student
 
 exam_id               //INT
@@ -304,6 +414,13 @@ state_id              //INT
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - En Inscripción
+2 - En Curso
+3 - Inhabilitado
+4 - Finalizado
+```
 
 # new_idiomas_exam_student_score
 
@@ -335,3 +452,9 @@ state_id              //INT
 
 id                    //INT
 name                  //VARCHAR(100)
+
+```
+1 - Pendiente
+2 - Aprobada
+3 - Rechazada
+```
