@@ -1,0 +1,792 @@
+{
+  "new_idiomas_document_type": [
+    {
+      "id": 1,
+      "name": "DNI"
+    },
+    {
+      "id": 2,
+      "name": "Carnet de extranjería"
+    },
+    {
+      "id": 3,
+      "name": "Pasaporte"
+    },
+    {
+      "id": 4,
+      "name": "Tarjeta de residencia"
+    }
+  ],
+  "new_idiomas_users": [
+    {
+      "id": 1,
+      "person": {
+        "id": 1,
+        "docNum": "12345678",
+        "docType": {
+          "id": 1,
+          "name": "DNI"
+        },
+        "names": "Juan",
+        "fatherLastName": "Pérez",
+        "motherLastName": "Gómez",
+        "nationality": {
+          "id": 9233,
+          "name": "Perú"
+        },
+        "phone": "123456789",
+        "personalEmail": "juan.perez@gmail.com",
+        "gender": "M",
+        "birthDate": "1990-01-01"
+      },
+      "email": "juan.perez@gmail.com",
+      "password": "QkNna0pSbmpEbU5WS2MrZzZvYWxpUT09OjoWAf7d/YAL1aNbVdgO+iDr",
+      "role": {
+        "id": 1,
+        "name": "Coordinador",
+        "description": "Responsable de la coordinación general"
+      },
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "person": {
+        "id": 2,
+        "docNum": "87654321",
+        "docType": {
+          "id": 1,
+          "name": "DNI"
+        },
+        "names": "María",
+        "fatherLastName": "Gómez",
+        "motherLastName": "Pérez",
+        "nationalityId": {
+          "id": 9233,
+          "name": "Perú"
+        },
+        "phone": "987654321",
+        "personalEmail": "maria.gomez@gmail.com",
+        "gender": "F",
+        "birthDate": "1995-01-01"
+      },
+      "email": "maria.gomez@gmail.com",
+      "password": "QkNna0pSbmpEbU5WS2MrZzZvYWxpUT09OjoWAf7d/YAL1aNbVdgO+iDr",
+      "role": {
+        "id": 2,
+        "name": "Docente",
+        "description": "Encargado de la enseñanza de idiomas"
+      },
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "person": {
+        "id": 3,
+        "docNum": "11111111",
+        "docTypeId": {
+          "id": 1,
+          "name": "DNI"
+        },
+        "names": "Pedro",
+        "fatherLastName": "García",
+        "motherLastName": "Pérez",
+        "nationalityId": {
+          "id": 9233,
+          "name": "Perú"
+        },
+        "phone": "111111111",
+        "personalEmail": "pedro.garcia@gmail.com",
+        "gender": "M",
+        "birthDate": "1995-01-01"
+      },
+      "email": "pedro.garcia@gmail.com",
+      "password": "QkNna0pSbmpEbU5WS2MrZzZvYWxpUT09OjoWAf7d/YAL1aNbVdgO+iDr",
+      "role": {
+        "id": 6,
+        "name": "Estudiante",
+        "description": "Persona que recibe la enseñanza"
+      },
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "person": {
+        "id": 4,
+        "docNum": "12345678",
+        "docType": [
+          {
+            "id": 1,
+            "name": "DNI"
+          }
+        ],
+        "names": "Jose Luis",
+        "fatherLastName": "Vergara",
+        "motherLastName": "Pachas",
+        "nationality": [
+          {
+            "id": 9233,
+            "name": "Perú"
+          }
+        ],
+        "phone": "987654321",
+        "personalEmail": "divorcedlance@gmail.com",
+        "gender": "M",
+        "birthDate": "2000-07-21T00:00:00.000Z"
+      },
+      "email": "divorcedlance@gmail.com",
+      "password": "V12345678",
+      "role": {
+        "id": 1,
+        "name": "Coordinador",
+        "description": "Responsable de la coordinación general"
+      },
+      "isActive": true
+    }
+  ],
+  "new_idiomas_roles": [
+    {
+      "id": 1,
+      "name": "Coordinador",
+      "description": "Responsable de la coordinación general"
+    },
+    {
+      "id": 2,
+      "name": "Docente",
+      "description": "Encargado de la enseñanza de idiomas"
+    },
+    {
+      "id": 3,
+      "name": "Programador",
+      "description": "Encargado del desarrollo y mantenimiento técnico"
+    },
+    {
+      "id": 4,
+      "name": "Asesor",
+      "description": "Proporciona orientación académica"
+    },
+    {
+      "id": 5,
+      "name": "Asistente",
+      "description": "Apoyo en diversas tareas operativas"
+    },
+    {
+      "id": 6,
+      "name": "Estudiante",
+      "description": "Persona que recibe la enseñanza"
+    }
+  ],
+  "new_idiomas_teachers": [
+    {
+      "id": 1,
+      "userId": 2,
+      "statusId": 1
+    }
+  ],
+  "new_idiomas_teachers_status": [
+    {
+      "id": 1,
+      "name": "Activo"
+    },
+    {
+      "id": 2,
+      "name": "Inactivo"
+    }
+  ],
+  "new_idiomas_students": [
+    {
+      "id": 1,
+      "userId": 3,
+      "studentCode": "123456",
+      "postgraduatePermanencyId": 1,
+      "facultyId": 1,
+      "postgraduateProgramId": 1,
+      "postgraduateEnrollmentCount": 1,
+      "postgraduateAdmissionYear": 2014,
+      "statusId": 1
+    }
+  ],
+  "new_idiomas_students_status": [
+    {
+      "id": 1,
+      "name": "Activo"
+    },
+    {
+      "id": 2,
+      "name": "Inactivo"
+    }
+  ],
+  "new_idiomas_faculties": [
+    {
+      "id": 1,
+      "name": "Medicina"
+    },
+    {
+      "id": 2,
+      "name": "Derecho y ciencias políticas"
+    },
+    {
+      "id": 3,
+      "name": "Letras y Ciencias Humanas"
+    },
+    {
+      "id": 4,
+      "name": "Farmacia y Bioquímica"
+    },
+    {
+      "id": 5,
+      "name": "Odontología"
+    },
+    {
+      "id": 6,
+      "name": "Educación"
+    },
+    {
+      "id": 7,
+      "name": "Química e Ingeniería Química"
+    },
+    {
+      "id": 8,
+      "name": "Veterinaria"
+    },
+    {
+      "id": 9,
+      "name": "Ciencias administrativas"
+    },
+    {
+      "id": 10,
+      "name": "Ciencias biológicas"
+    },
+    {
+      "id": 11,
+      "name": "Ciencias contables"
+    },
+    {
+      "id": 12,
+      "name": "Ciencias económicas"
+    },
+    {
+      "id": 13,
+      "name": "Ciencias físicas"
+    },
+    {
+      "id": 14,
+      "name": "Ciencias matemáticas"
+    },
+    {
+      "id": 15,
+      "name": "Ciencias sociales"
+    },
+    {
+      "id": 16,
+      "name": "Ingeniería geológica, minera, metalúrgica y geográfica"
+    },
+    {
+      "id": 17,
+      "name": "Ingeniería industrial"
+    },
+    {
+      "id": 18,
+      "name": "Psicología"
+    },
+    {
+      "id": 19,
+      "name": "Ingeniería electrónica y eléctrica"
+    },
+    {
+      "id": 20,
+      "name": "Ingeniería de sistemas e informática"
+    }
+  ],
+  "new_idiomas_postgraduate_programs": [
+    {
+      "id": 201,
+      "name": "Segunda Especialidad en Medicina Humana"
+    },
+    {
+      "id": 202,
+      "name": "Segunda Especialidad en Enfermería"
+    },
+    {
+      "id": 203,
+      "name": "Segunda Especialidad en Epidemiología y Economía V..."
+    },
+    {
+      "id": 204,
+      "name": "Programa de Residentado en Clínica de Animales Men..."
+    },
+    {
+      "id": 205,
+      "name": "Programa de Residentado en Medicina y Producción L..."
+    }
+  ],
+  "new_idiomas_teacher_language": [
+    {
+      "id": 1,
+      "teacherId": 1,
+      "languageId": 1
+    },
+    {
+      "id": 2,
+      "teacherId": 1,
+      "languageId": 2
+    }
+  ],
+  "countries": [
+    {
+      "id": 9233,
+      "name": "Perú"
+    },
+    {
+      "id": 9234,
+      "name": "Argentina"
+    },
+    {
+      "id": 9235,
+      "name": "Bolivia"
+    },
+    {
+      "id": 9236,
+      "name": "Brasil"
+    },
+    {
+      "id": 9237,
+      "name": "Chile"
+    },
+    {
+      "id": 9238,
+      "name": "Colombia"
+    },
+    {
+      "id": 9239,
+      "name": "Ecuador"
+    },
+    {
+      "id": 9240,
+      "name": "Paraguay"
+    },
+    {
+      "id": 9241,
+      "name": "Uruguay"
+    },
+    {
+      "id": 9242,
+      "name": "Venezuela"
+    }
+  ],
+  "new_idiomas_postgraduate_permanency": [
+    {
+      "id": 1,
+      "name": "Activo"
+    },
+    {
+      "id": 2,
+      "name": "Egresado"
+    },
+    {
+      "id": 3,
+      "name": "Reserva de Ingreso"
+    },
+    {
+      "id": 4,
+      "name": "Inactivo"
+    },
+    {
+      "id": 5,
+      "name": "Abandono"
+    }
+  ],
+  "new_idiomas_languages": [
+    {
+      "id": 1,
+      "name": "Inglés"
+    },
+    {
+      "id": 2,
+      "name": "Portugués"
+    },
+    {
+      "id": 3,
+      "name": "Italiano"
+    },
+    {
+      "id": 4,
+      "name": "Francés"
+    },
+    {
+      "id": 5,
+      "name": "Quechua"
+    },
+    {
+      "id": 6,
+      "name": "Aymara"
+    }
+  ],
+  "new_idiomas_programs": [
+    {
+      "id": 1,
+      "name": "Regular"
+    },
+    {
+      "id": 2,
+      "name": "Repaso"
+    },
+    {
+      "id": 3,
+      "name": "Intensivo"
+    }
+  ],
+  "new_idiomas_levels": [
+    {
+      "id": 1,
+      "name": "Básico"
+    },
+    {
+      "id": 2,
+      "name": "Intermedio"
+    },
+    {
+      "id": 3,
+      "name": "Avanzado"
+    }
+  ],
+  "new_idiomas_days": [
+    {
+      "id": 1,
+      "name": "Lunes"
+    },
+    {
+      "id": 2,
+      "name": "Martes"
+    },
+    {
+      "id": 3,
+      "name": "Miércoles"
+    },
+    {
+      "id": 4,
+      "name": "Jueves"
+    },
+    {
+      "id": 5,
+      "name": "Viernes"
+    },
+    {
+      "id": 6,
+      "name": "Sábado"
+    },
+    {
+      "id": 7,
+      "name": "Domingo"
+    }
+  ],
+  "new_idiomas_sections": [
+    {
+      "id": 1,
+      "name": "A"
+    },
+    {
+      "id": 2,
+      "name": "B"
+    },
+    {
+      "id": 3,
+      "name": "C"
+    }
+  ],
+  "new_idiomas_max_cycle_per_language_level": [
+    {
+      "id": 1,
+      "languageId": 1,
+      "levelId": 1,
+      "maxCycle": 6
+    },
+    {
+      "id": 2,
+      "languageId": 1,
+      "levelId": 2,
+      "maxCycle": 4
+    },
+    {
+      "id": 3,
+      "languageId": 2,
+      "levelId": 1,
+      "maxCycle": 5
+    },
+    {
+      "id": 4,
+      "languageId": 2,
+      "levelId": 2,
+      "maxCycle": 3
+    },
+    {
+      "id": 5,
+      "languageId": 3,
+      "levelId": 1,
+      "maxCycle": 5
+    },
+    {
+      "id": 6,
+      "languageId": 3,
+      "levelId": 2,
+      "maxCycle": 4
+    }
+  ],
+  "new_idiomas_courses_status": [
+    {
+      "id": 1,
+      "name": "En matrícula"
+    },
+    {
+      "id": 2,
+      "name": "En curso"
+    },
+    {
+      "id": 3,
+      "name": "Inhabilitado"
+    },
+    {
+      "id": 4,
+      "name": "Cerrado"
+    },
+    {
+      "id": 5,
+      "name": "En matrícula interna"
+    }
+  ],
+  "new_idiomas_courses": [
+    {
+      "id": 1,
+      "program": {
+        "id": 1,
+        "name": "Regular"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "level": {
+        "id": 1,
+        "name": "Básico"
+      },
+      "cycle": 4,
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "15:22",
+          "end": "15:22"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-03-02T00:00:00.000Z",
+      "endDate": "2025-03-28T00:00:00.000Z",
+      "status": {
+        "id": 3,
+        "name": "Inhabilitado"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 2,
+      "program": {
+        "id": 2,
+        "name": "Repaso"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "15:24",
+          "end": "15:24"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-03-12T00:00:00.000Z",
+      "endDate": "2025-03-28T00:00:00.000Z",
+      "status": {
+        "id": 3,
+        "name": "Inhabilitado"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 3,
+      "program": {
+        "id": 2,
+        "name": "Repaso"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "15:33",
+          "end": "15:35"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-02-27T00:00:00.000Z",
+      "endDate": "2025-03-27T00:00:00.000Z",
+      "status": {
+        "id": 3,
+        "name": "Inhabilitado"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 4,
+      "program": {
+        "id": 2,
+        "name": "Repaso"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "15:33",
+          "end": "15:35"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-02-27T00:00:00.000Z",
+      "endDate": "2025-03-27T00:00:00.000Z",
+      "status": {
+        "id": 3,
+        "name": "Inhabilitado"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 5,
+      "program": {
+        "id": 2,
+        "name": "Repaso"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "15:33",
+          "end": "15:35"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-02-27T00:00:00.000Z",
+      "endDate": "2025-03-27T00:00:00.000Z",
+      "status": {
+        "id": 3,
+        "name": "Inhabilitado"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 6,
+      "program": {
+        "id": 3,
+        "name": "Intensivo"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "level": {
+        "id": 1,
+        "name": "Básico"
+      },
+      "cycle": 1,
+      "schedule": [
+        {
+          "day": {
+            "id": 3,
+            "name": "Miércoles"
+          },
+          "start": "16:40",
+          "end": "15:42"
+        }
+      ],
+      "section": {
+        "id": 1,
+        "name": "A"
+      },
+      "startDate": "2025-03-14T00:00:00.000Z",
+      "endDate": "2025-03-29T00:00:00.000Z",
+      "status": {
+        "id": 1,
+        "name": "En matrícula"
+      },
+      "teacherId": 1
+    },
+    {
+      "id": 7,
+      "program": {
+        "id": 2,
+        "name": "Repaso"
+      },
+      "language": {
+        "id": 1,
+        "name": "Inglés"
+      },
+      "schedule": [
+        {
+          "day": {
+            "id": 1,
+            "name": "Lunes"
+          },
+          "start": "17:00",
+          "end": "20:00"
+        }
+      ],
+      "section": {
+        "id": 2,
+        "name": "B"
+      },
+      "startDate": "2025-03-03T00:00:00.000Z",
+      "endDate": "2025-04-04T00:00:00.000Z",
+      "status": {
+        "id": 1,
+        "name": "En matrícula"
+      },
+      "teacherId": 1
+    }
+  ]
+}
