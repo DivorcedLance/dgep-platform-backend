@@ -1,0 +1,49 @@
+import { DocumentType } from "./documentType";
+import { Role } from "./role";
+import { TeacherState } from "./teacherState";
+import { Language } from "./language";
+import { StudentState } from "./studentState";
+import { Country } from "./country";
+import { Faculty } from "./faculty";
+import { Program } from "./program";
+import { Level } from "./level";
+import { TeacherUser } from "./user";
+import { Section } from "./section";
+import { Day } from "./day";
+
+export type UserDetails = {
+  docTypes: DocumentType[];
+  roles: Role[];
+  teacherStates: TeacherState[];
+  languages: Language[];
+  studentStates: StudentState[];
+  countries: Country[];
+  faculties: Faculty[];
+  postgraduatePrograms: PostgraduatePrograms[];
+  postgraduatePermanencies: PostgraduatePermanency[];
+};
+
+export type MaxCyclePerLanguageLevel = {
+  languageId: number;
+  levelId: number;
+  maxCycle: number;
+}
+
+export type CourseDetails = {
+  programs: Program[];
+  languages: Language[];
+  levels: Level[];
+  sections: Section[];
+  days: Day[];
+  maxCyclePerLanguageLevel: MaxCyclePerLanguageLevel[];
+  activeTeachers: TeacherUser[];
+  courseStates: CourseState[];
+}
+
+export type NewStudentRequestDetails = {
+  docTypes: DocumentType[];
+  countries: Country[];
+  faculties: Faculty[];
+  postgraduatePrograms: PostgraduatePrograms[];
+  postgraduatePermanencies: PostgraduatePermanency[];
+};
