@@ -2,8 +2,20 @@ import { getUser, createUser, updateUser } from '@/lib/db/user'
 import { UserCreate } from '@/lib/db/types/user'
 import { NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get('id')
+
+    if (id) {
+      const users = await getUser()
+      const user = users.find(user => user.id === Number(id))
+      if (!user) {
+        return new NextResponse('User not found', { status: 404 })
+      }
+      return NextResponse.json(user, { status: 200 })
+    }
+
     const users = await getUser()
     return NextResponse.json(users, { status: 200 })
   } catch (error) {
