@@ -1,9 +1,9 @@
 import { Country } from "./country";
-import { DocumentType } from "./documentType";
+import { DocType } from "./docType";
 
 export type Person = {
   docNum: string;
-  docType: DocumentType;
+  docType: DocType;
   names: string;
   fatherLastName: string;
   motherLastName: string;

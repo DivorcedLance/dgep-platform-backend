@@ -1,7 +1,7 @@
 import { Person, PersonCreate } from "./person";
 import { Role } from "./role";
-import { StudentData } from "./student";
-import { TeacherData } from "./teacher";
+import { StudentData, StudentDataCreate } from "./student";
+import { TeacherData, TeacherDataCreate } from "./teacher";
 
 export type BaseUser = Person & {
   id: number;

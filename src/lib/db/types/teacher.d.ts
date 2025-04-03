@@ -1,17 +1,17 @@
 import { Language } from "./language";
 
-export type TeacherStatus = {
+export type TeacherState = {
   id: number;
   name: string;
 }
 
 export type TeacherData = {
   id: number;
-  status: TeacherStatus;
+  state: TeacherState;
   specializedLanguages: Language[];
 }
 
 export type TeacherDataCreate = {
-  statusId: number;
+  stateId: number;
   specializedLanguageIds: number[];
 }

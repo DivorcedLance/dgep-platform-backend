@@ -16,7 +16,7 @@ export type CourseCreate = {
   startDate: string
   endDate: string
   teacherId: number
-  statusId: number
+  stateId: number
 }
 
 export type DaySchedule = {
@@ -41,6 +41,6 @@ export type Course = {
   startDate: Date
   endDate: Date
   teacher: TeacherUser
-  status: CourseState
+  state: CourseState
   enrollmentCount?: number
 }

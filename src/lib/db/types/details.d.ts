@@ -1,4 +1,4 @@
-import { DocumentType } from "./documentType";
+import { DocType } from "./docType";
 import { Role } from "./role";
 import { TeacherState } from "./teacherState";
 import { Language } from "./language";
@@ -12,7 +12,7 @@ import { Section } from "./section";
 import { Day } from "./day";
 
 export type UserDetails = {
-  docTypes: DocumentType[];
+  docTypes: DocType[];
   roles: Role[];
   teacherStates: TeacherState[];
   languages: Language[];
@@ -41,7 +41,7 @@ export type CourseDetails = {
 }
 
 export type NewStudentRequestDetails = {
-  docTypes: DocumentType[];
+  docTypes: DocType[];
   countries: Country[];
   faculties: Faculty[];
   postgraduatePrograms: PostgraduatePrograms[];

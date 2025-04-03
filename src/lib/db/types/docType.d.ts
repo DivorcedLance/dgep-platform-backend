@@ -1,4 +1,4 @@
-export type DocumentType = {
+export type DocType = {
   id: number;
   name: string;
 }

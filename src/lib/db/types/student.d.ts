@@ -1,4 +1,4 @@
-export type StudentStatus = {
+export type StudentState = {
   id: number;
   name: string;
 }
@@ -26,7 +26,7 @@ export type StudentData = {
   postgraduateProgram: PostgraduateProgram;
   postgraduateEnrollmentCount: number;
   postgraduateAdmissionYear: number;
-  status: StudentStatus;
+  state: StudentState;
 }
 
 export type StudentDataCreate = {
@@ -36,5 +36,5 @@ export type StudentDataCreate = {
   postgraduateProgramId: number;
   postgraduateEnrollmentCount: number;
   postgraduateAdmissionYear: number;
-  statusId: number;
+  stateId: number;
 }
