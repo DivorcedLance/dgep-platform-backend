@@ -1,4 +1,4 @@
-# new_idiomas_document_type
+# new_idiomas_doc_type
 
 id                    //INT
 name                  //VARCHAR(100)

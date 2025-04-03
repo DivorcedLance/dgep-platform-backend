@@ -1,5 +1,5 @@
 -- Tipos de documento
-INSERT INTO new_idiomas_document_type (id, name) VALUES
+INSERT INTO new_idiomas_doc_type (id, name) VALUES
 (1, 'DNI'),
 (2, 'Carnet de Extranjeria'),
 (3, 'Pasaporte'),

@@ -1,4 +1,4 @@
-export const docTypeTable = 'new_idiomas_document_type'
+export const docTypeTable = 'new_idiomas_doc_type'
 export const countryTable = 'countries'
 export const personTable = 'new_idiomas_person'
 export const roleTable = 'new_idiomas_role'

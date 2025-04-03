@@ -1,18 +1,18 @@
 -- Tabla: Tipo de documento
-CREATE TABLE new_idiomas_document_type (
-    id INT PRIMARY KEY,
+CREATE TABLE new_idiomas_doc_type (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Países
 CREATE TABLE countries (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Persona
 CREATE TABLE new_idiomas_person (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     doc_num VARCHAR(20),
     doc_type_id INT,
     names VARCHAR(100),
@@ -23,19 +23,19 @@ CREATE TABLE new_idiomas_person (
     personal_email VARCHAR(100),
     gender VARCHAR(1),
     birthDate DATE,
-    FOREIGN KEY (doc_type_id) REFERENCES new_idiomas_document_type(id),
+    FOREIGN KEY (doc_type_id) REFERENCES new_idiomas_doc_type(id),
     FOREIGN KEY (nationality_id) REFERENCES countries(id)
 );
 
 -- Tabla: Roles de usuario
 CREATE TABLE new_idiomas_role (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Usuario
 CREATE TABLE new_idiomas_user (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     person_id INT,
     password VARCHAR(100),
     role_id INT,
@@ -46,13 +46,13 @@ CREATE TABLE new_idiomas_user (
 
 -- Tabla: Estado del docente
 CREATE TABLE new_idiomas_teacher_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Docente
 CREATE TABLE new_idiomas_teacher (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INT,
     state_id INT,
     FOREIGN KEY (user_id) REFERENCES new_idiomas_user(id),
@@ -69,13 +69,13 @@ CREATE TABLE new_idiomas_teacher_language (
 
 -- Tabla: Permanencia de posgrado
 CREATE TABLE new_idiomas_postgraduate_permanency (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Facultades
 CREATE TABLE new_idiomas_faculty (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
@@ -83,19 +83,19 @@ CREATE TABLE new_idiomas_faculty (
 CREATE TABLE new_idiomas_postgraduate_program (
     program_id INT,
     faculty_id INT,
-    name VARCHAR(100)
+    name VARCHAR(100),
     PRIMARY KEY (program_id, faculty_id)
 );
 
 -- Tabla: Estado del estudiante
 CREATE TABLE new_idiomas_student_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Estudiantes
 CREATE TABLE new_idiomas_student (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INT,
     student_code VARCHAR(20),
     postgraduate_permanency_id INT,
@@ -113,31 +113,31 @@ CREATE TABLE new_idiomas_student (
 
 -- Tabla: Idiomas
 CREATE TABLE new_idiomas_language (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Programas
 CREATE TABLE new_idiomas_program (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Niveles
 CREATE TABLE new_idiomas_level (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Días
 CREATE TABLE new_idiomas_day (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Secciones
 CREATE TABLE new_idiomas_section (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
@@ -153,13 +153,13 @@ CREATE TABLE new_idiomas_max_cycle_per_language_level (
 
 -- Tabla: Estados del curso
 CREATE TABLE new_idiomas_courses_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Curso
 CREATE TABLE new_idiomas_course (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     program_id INT,
     language_id INT,
     level_id INT,
@@ -194,19 +194,19 @@ CREATE TABLE new_idiomas_course_schedule (
 
 -- Tabla: Métodos de pago
 CREATE TABLE new_idiomas_payment_method (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Estados de pago
 CREATE TABLE new_idiomas_payment_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Tabla: Pagos
 CREATE TABLE new_idiomas_payment (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     operation_number VARCHAR(100),
     payment_method_id INT,
     payment_date TIMESTAMP,
@@ -218,13 +218,13 @@ CREATE TABLE new_idiomas_payment (
 
 -- Estado de solicitud de matrícula
 CREATE TABLE new_idiomas_enrollment_request_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Solicitud de matrícula a curso
 CREATE TABLE new_idiomas_course_enrollment_request (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INT,
     course_id INT,
     payment_id INT,
@@ -240,7 +240,7 @@ CREATE TABLE new_idiomas_course_enrollment_request (
 
 -- Estado del estudiante en curso
 CREATE TABLE new_idiomas_course_student_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
@@ -270,13 +270,13 @@ CREATE TABLE new_idiomas_course_student_score (
 
 -- Estado de solicitud de rezago
 CREATE TABLE new_idiomas_straggle_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Solicitud de rezago
 CREATE TABLE new_idiomas_course_straggle_request (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     prev_course_id INT,
     student_id INT,
     state_id INT,
@@ -292,19 +292,19 @@ CREATE TABLE new_idiomas_course_straggle_request (
 
 -- Modalidad de examen
 CREATE TABLE new_idiomas_exam_modality (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Estado del examen
 CREATE TABLE new_idiomas_exam_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Examen
 CREATE TABLE new_idiomas_exam (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     exam_modality_id INT,
     language_id INT,
     evaluation_jury_ids INT[],
@@ -324,7 +324,7 @@ CREATE TABLE new_idiomas_exam (
 
 -- Solicitud de inscripción a examen
 CREATE TABLE new_idiomas_exam_enrollment_request (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INT,
     exam_id INT,
     payment_id INT,
@@ -340,7 +340,7 @@ CREATE TABLE new_idiomas_exam_enrollment_request (
 
 -- Estado del estudiante en examen
 CREATE TABLE new_idiomas_exam_student_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
@@ -366,7 +366,7 @@ CREATE TABLE new_idiomas_exam_student_score (
 
 -- Solicitud de rezago en examen
 CREATE TABLE new_idiomas_exam_straggle_request (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     prev_exam_id INT,
     student_id INT,
     state_id INT,
@@ -382,13 +382,13 @@ CREATE TABLE new_idiomas_exam_straggle_request (
 
 -- Estado de solicitud de suficiencia
 CREATE TABLE new_idiomas_proficiency_request_state (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100)
 );
 
 -- Solicitud de suficiencia
 CREATE TABLE new_idiomas_proficiency_request (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id INT,
     language_id INT,
     level_id INT,
