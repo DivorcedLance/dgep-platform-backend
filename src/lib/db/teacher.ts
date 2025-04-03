@@ -4,7 +4,7 @@ import { TeacherState } from './types/teacher';
 export async function getTeacherStateById(id: number): Promise<TeacherState | null> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_teacher_state
       WHERE id = ?
     `,
@@ -26,7 +26,7 @@ export async function getTeacherStateById(id: number): Promise<TeacherState | nu
 export async function getTeacherState(): Promise<TeacherState[]> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_teacher_state
     `,
   });

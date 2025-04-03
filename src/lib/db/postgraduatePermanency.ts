@@ -4,7 +4,7 @@ import { PostgraduatePermanency } from './types/student';
 export async function getPostgraduatePermanencyById(id: number): Promise<PostgraduatePermanency | null> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_postgraduate_permanency
       WHERE id = ?
     `,
@@ -26,7 +26,7 @@ export async function getPostgraduatePermanencyById(id: number): Promise<Postgra
 export async function getPostgraduatePermanency(): Promise<PostgraduatePermanency[]> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_postgraduate_permanency
     `,
   });

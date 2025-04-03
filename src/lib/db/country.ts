@@ -4,7 +4,7 @@ import { Country } from './types/country';
 export async function getCountryById(id: number): Promise<Country | null> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_country
       WHERE id = ?
     `,
@@ -26,7 +26,7 @@ export async function getCountryById(id: number): Promise<Country | null> {
 export async function getCountry(): Promise<Country[]> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_country
     `,
   });

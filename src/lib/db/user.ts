@@ -3,11 +3,11 @@ import { getCountry, getCountryById } from './country';
 import { getDocType, getDocTypeById } from './docType';
 import { getFaculty, getFacultyById } from './faculty';
 import { getPostgraduatePermanency, getPostgraduatePermanencyById } from './postgraduatePermanency';
-import { getPostgraduateProgram, getPostgraduateProgramById } from './postgraduateProgram';
+import { getPostgraduateProgramGroupedByFaculty, getPostgraduateProgramById } from './postgraduateProgram';
 import { getStudentState, getStudentStateById } from './student';
 import { getTeacherState, getTeacherStateById } from './teacher';
 import { getRole, getRoleById } from './role';
-import { StudentData, StudentDataCreate } from './types/student';
+import { PostgraduateProgram, StudentData, StudentDataCreate } from './types/student';
 import { TeacherData, TeacherDataCreate } from './types/teacher';
 import { UserCreate, User } from './types/user';
 
@@ -116,7 +116,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
       const [postgraduatePermanency, faculty, postgraduateProgram, studentState] = await Promise.all([
         getPostgraduatePermanencyById(studentData.postgraduatePermanencyId),
         getFacultyById(studentData.facultyId),
-        getPostgraduateProgramById(studentData.postgraduateProgramId),
+        getPostgraduateProgramById(studentData.postgraduateProgramId, studentData.facultyId),
         getStudentStateById(studentData.stateId),
       ]);
 
@@ -306,7 +306,7 @@ export async function getUserById(id: number): Promise<User | null> {
     const [postgraduatePermanency, faculty, postgraduateProgram, studentState] = await Promise.all([
       getPostgraduatePermanencyById(studentRow.postgraduate_permanency_id as number),
       getFacultyById(studentRow.faculty_id as number),
-      getPostgraduateProgramById(studentRow.postgraduate_program_id as number),
+      getPostgraduateProgramById(studentRow.postgraduate_program_id as number, studentRow.faculty_id as number),
       getStudentStateById(studentRow.state_id as number),
     ]);
 
@@ -353,7 +353,7 @@ export async function getUser(): Promise<User[]> {
     getCountry(),
     getFaculty(),
     getPostgraduatePermanency(),
-    getPostgraduateProgram(),
+    getPostgraduateProgramGroupedByFaculty(),
     getStudentState(),
     getTeacherState(),
   ]);
@@ -363,7 +363,9 @@ export async function getUser(): Promise<User[]> {
   const nationalityMap = new Map(nationalities.map((country) => [country.id, country]));
   const facultyMap = new Map(faculties.map((faculty) => [faculty.id, faculty]));
   const postgraduatePermanencyMap = new Map(postgraduatePermanencies.map((item) => [item.id, item]));
-  const postgraduateProgramMap = new Map(postgraduatePrograms.map((program) => [program.id, program]));
+  const postgraduateProgramMap = new Map<number, PostgraduateProgram[]>(
+    Object.entries(postgraduatePrograms).map(([facultyId, programs]) => [Number(facultyId), programs])
+  );
   const studentStateMap = new Map(studentStates.map((state) => [state.id, state]));
   const teacherStateMap = new Map(teacherStates.map((state) => [state.id, state]));
 
@@ -451,7 +453,9 @@ export async function getUser(): Promise<User[]> {
 
         const postgraduatePermanency = postgraduatePermanencyMap.get(studentRow.postgraduate_permanency_id as number);
         const faculty = facultyMap.get(studentRow.faculty_id as number);
-        const postgraduateProgram = postgraduateProgramMap.get(studentRow.postgraduate_program_id as number);
+        const postgraduateProgram = postgraduateProgramMap.get(studentRow.faculty_id as number)?.find(
+          (program) => program.id === studentRow.postgraduate_program_id
+        );
         const studentState = studentStateMap.get(studentRow.state_id as number);
 
         if (postgraduatePermanency && faculty && postgraduateProgram && studentState) {

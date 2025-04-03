@@ -4,7 +4,7 @@ import { Role } from './types/role';
 export async function getRoleById(id: number): Promise<Role | null> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_role
       WHERE id = ?
     `,
@@ -26,7 +26,7 @@ export async function getRoleById(id: number): Promise<Role | null> {
 export async function getRole(): Promise<Role[]> {
   const result = await db.execute({
     sql: `
-      SELECT id, name, code
+      SELECT id, name
       FROM new_idiomas_role
     `,
   });
