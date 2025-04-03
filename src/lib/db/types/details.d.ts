@@ -10,6 +10,7 @@ import { Level } from "./level";
 import { TeacherUser } from "./user";
 import { Section } from "./section";
 import { Day } from "./day";
+import { PostgraduatePermanency, PostgraduateProgram } from "./student";
 
 export type UserDetails = {
   docTypes: DocType[];
@@ -19,7 +20,7 @@ export type UserDetails = {
   studentStates: StudentState[];
   countries: Country[];
   faculties: Faculty[];
-  postgraduatePrograms: PostgraduatePrograms[];
+  postgraduatePrograms: Record<number, PostgraduateProgram[]>;
   postgraduatePermanencies: PostgraduatePermanency[];
 };
 
@@ -44,6 +45,6 @@ export type NewStudentRequestDetails = {
   docTypes: DocType[];
   countries: Country[];
   faculties: Faculty[];
-  postgraduatePrograms: PostgraduatePrograms[];
+  postgraduatePrograms: PostgraduateProgram[];
   postgraduatePermanencies: PostgraduatePermanency[];
 };

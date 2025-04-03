@@ -1,14 +1,11 @@
+import { Faculty } from "./faculty";
+
 export type StudentState = {
   id: number;
   name: string;
 }
 
 export type PostgraduatePermanency = {
-  id: number;
-  name: string;
-}
-
-export type Faculty = {
   id: number;
   name: string;
 }

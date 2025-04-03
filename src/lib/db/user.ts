@@ -7,9 +7,43 @@ import { getPostgraduateProgramGroupedByFaculty, getPostgraduateProgramById } fr
 import { getStudentState, getStudentStateById } from './student';
 import { getTeacherState, getTeacherStateById } from './teacher';
 import { getRole, getRoleById } from './role';
-import { PostgraduateProgram, StudentData, StudentDataCreate } from './types/student';
-import { TeacherData, TeacherDataCreate } from './types/teacher';
+import { PostgraduatePermanency, PostgraduateProgram, StudentData, StudentDataCreate, StudentState } from './types/student';
+import { TeacherData, TeacherDataCreate, TeacherState } from './types/teacher';
 import { UserCreate, User } from './types/user';
+import { UserDetails } from './types/details';
+import { getLanguage } from './language';
+import { DocType } from './types/docType';
+import { Role } from './types/role';
+import { Language } from './types/language';
+import { Country } from './types/country';
+import { Faculty } from './types/faculty';
+
+export async function getUserDetails(): Promise<UserDetails> {
+  const [docTypes, roles, teacherStates, languages, studentStates, countries, faculties, postgraduatePrograms, postgraduatePermanencies] = await Promise.all([
+    getDocType(),
+    getRole(),
+    getTeacherState(),
+    getLanguage(),
+    getStudentState(),
+    getCountry(),
+    getFaculty(),
+    getPostgraduateProgramGroupedByFaculty(),
+    getPostgraduatePermanency(),
+  ]);
+
+  return {
+    docTypes: docTypes as DocType[],
+    roles: roles as Role[],
+    teacherStates: teacherStates as TeacherState[],
+    languages: languages as Language[],
+    studentStates: studentStates as StudentState[],
+    countries: countries as Country[],
+    faculties: faculties as Faculty[],
+    postgraduatePrograms: postgraduatePrograms as Record<number, PostgraduateProgram[]>,
+    postgraduatePermanencies: postgraduatePermanencies as PostgraduatePermanency[],
+  };
+}
+
 
 export async function createUser(userCreate: UserCreate): Promise<User> {
   const tx = await db.transaction();
