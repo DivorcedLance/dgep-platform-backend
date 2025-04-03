@@ -1,11 +1,13 @@
 import { db } from './db';
 import { DocType } from './types/docType';
 
+export const docTypeTable = 'new_idiomas_document_type';
+
 export async function getDocTypeById(id: number): Promise<DocType | null> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_doc_type
+      FROM ${docTypeTable}
       WHERE id = ?
     `,
     args: [id],
@@ -27,7 +29,7 @@ export async function getDocType(): Promise<DocType[]> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_doc_type
+      FROM ${docTypeTable}
     `,
   });
 
