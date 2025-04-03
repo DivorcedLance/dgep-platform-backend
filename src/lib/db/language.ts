@@ -1,11 +1,12 @@
 import { db } from './db';
 import { Language } from './types/language';
+import { languageTable } from '@/lib/db/tables';
 
 export async function getLanguageById(id: number): Promise<Language | null> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_language
+      FROM ${languageTable}
       WHERE id = ?
     `,
     args: [id],
@@ -27,7 +28,7 @@ export async function getLanguageByIds(ids: number[]): Promise<Language[]> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_language
+      FROM ${languageTable}
       WHERE id IN (${ids.join(',')})
     `,
   });
@@ -42,7 +43,7 @@ export async function getLanguage(): Promise<Language[]> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_language
+      FROM ${languageTable}
     `,
   });
 

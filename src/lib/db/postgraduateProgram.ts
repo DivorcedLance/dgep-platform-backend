@@ -1,6 +1,8 @@
 import { db } from './db';
 import { PostgraduateProgram } from './types/student';
 
+import { postgraduateProgramTable } from '@/lib/db/tables';
+
 export async function getPostgraduateProgramById(
   program_id: number,
   faculty_id: number
@@ -8,7 +10,7 @@ export async function getPostgraduateProgramById(
   const result = await db.execute({
     sql: `
       SELECT program_id, faculty_id, name
-      FROM new_idiomas_postgraduate_program
+      FROM ${postgraduateProgramTable}
       WHERE program_id = ? AND faculty_id = ?
       LIMIT 1
     `,
@@ -33,7 +35,7 @@ export async function getPostgraduateProgramByFacultyId(
   const result = await db.execute({
     sql: `
       SELECT program_id, faculty_id, name
-      FROM new_idiomas_postgraduate_program
+      FROM ${postgraduateProgramTable}
       WHERE faculty_id = ?
     `,
     args: [faculty_id],
@@ -49,7 +51,7 @@ export async function getPostgraduateProgramGroupedByFaculty() : Promise<Record<
   const result = await db.execute({
     sql: `
       SELECT program_id, faculty_id, name
-      FROM new_idiomas_postgraduate_program
+      FROM ${postgraduateProgramTable}
     `,
   });
 

@@ -1,11 +1,13 @@
 import { db } from './db';
 import { PostgraduatePermanency } from './types/student';
 
+import { postgraduatePermanencyTable } from '@/lib/db/tables';
+
 export async function getPostgraduatePermanencyById(id: number): Promise<PostgraduatePermanency | null> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_postgraduate_permanency
+      FROM ${postgraduatePermanencyTable}
       WHERE id = ?
     `,
     args: [id],
@@ -27,7 +29,7 @@ export async function getPostgraduatePermanency(): Promise<PostgraduatePermanenc
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_postgraduate_permanency
+      FROM ${postgraduatePermanencyTable}
     `,
   });
 

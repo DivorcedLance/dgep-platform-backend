@@ -1,7 +1,7 @@
 import { db } from './db';
 import { DocType } from './types/docType';
 
-export const docTypeTable = 'new_idiomas_document_type';
+import { docTypeTable } from '@/lib/db/tables';
 
 export async function getDocTypeById(id: number): Promise<DocType | null> {
   const result = await db.execute({

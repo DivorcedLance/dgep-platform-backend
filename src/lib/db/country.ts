@@ -1,7 +1,7 @@
 import { db } from './db';
 import { Country } from './types/country';
 
-export const countryTable = 'countries';
+import { countryTable } from '@/lib/db/tables';
 
 export async function getCountryById(id: number): Promise<Country | null> {
   const result = await db.execute({

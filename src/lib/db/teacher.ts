@@ -1,11 +1,13 @@
 import { db } from './db';
 import { TeacherState } from './types/teacher';
 
+import { teacherStateTable } from '@/lib/db/tables';
+
 export async function getTeacherStateById(id: number): Promise<TeacherState | null> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_teacher_state
+      FROM ${teacherStateTable}
       WHERE id = ?
     `,
     args: [id],
@@ -27,7 +29,7 @@ export async function getTeacherState(): Promise<TeacherState[]> {
   const result = await db.execute({
     sql: `
       SELECT id, name
-      FROM new_idiomas_teacher_state
+      FROM ${teacherStateTable}
     `,
   });
 

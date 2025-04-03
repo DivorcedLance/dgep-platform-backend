@@ -17,6 +17,7 @@ import { Role } from './types/role';
 import { Language } from './types/language';
 import { Country } from './types/country';
 import { Faculty } from './types/faculty';
+import { languageTable, personTable, studentTable, teacherLanguageTable, teacherTable, userTable } from './tables';
 
 export async function getUserDetails(): Promise<UserDetails> {
   const [docTypes, roles, teacherStates, languages, studentStates, countries, faculties, postgraduatePrograms, postgraduatePermanencies] = await Promise.all([
@@ -52,7 +53,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
     // 1. Insertar persona
     const personResult = await tx.execute({
       sql: `
-        INSERT INTO new_idiomas_person (
+        INSERT INTO ${personTable} (
           doc_num, doc_type_id, names, father_last_name, mother_last_name,
           nationality_id, phone, personal_email, gender, birthDate
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -69,7 +70,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
     // 2. Insertar usuario
     const userResult = await tx.execute({
       sql: `
-        INSERT INTO new_idiomas_user (
+        INSERT INTO ${userTable} (
           person_id, password, role_id, is_active
         ) VALUES (?, ?, ?, ?)
         RETURNING id
@@ -88,7 +89,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
 
       const teacherResult = await tx.execute({
         sql: `
-          INSERT INTO new_idiomas_teacher (user_id, state_id)
+          INSERT INTO ${teacherTable} (user_id, state_id)
           VALUES (?, ?)
           RETURNING id
         `,
@@ -100,7 +101,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
       for (const languageId of teacherData.specializedLanguageIds) {
         await tx.execute({
           sql: `
-            INSERT INTO new_idiomas_teacher_language (teacher_id, language_id)
+            INSERT INTO ${teacherLanguageTable} (teacher_id, language_id)
             VALUES (?, ?)
           `,
           args: [userId, languageId],
@@ -110,8 +111,8 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
       const languageResult = await tx.execute({
         sql: `
           SELECT l.id, l.name 
-          FROM new_idiomas_teacher_language tl
-          JOIN new_idiomas_language l ON l.id = tl.language_id
+          FROM ${teacherLanguageTable} tl
+          JOIN ${languageTable} l ON l.id = tl.language_id
           WHERE tl.teacher_id = ?
         `,
         args: [userId],
@@ -132,7 +133,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
 
       const studentResult = await tx.execute({
         sql: `
-          INSERT INTO new_idiomas_student (
+          INSERT INTO ${studentTable} (
             user_id, student_code, postgraduate_permanency_id,
             faculty_id, postgraduate_program_id, postgraduate_enrollment_count,
             postgraduate_admission_year, state_id
@@ -236,8 +237,8 @@ export async function getUserById(id: number): Promise<User | null> {
         u.id, u.is_active, u.role_id, p.doc_num, p.doc_type_id, p.names, 
         p.father_last_name, p.mother_last_name, p.nationality_id, p.phone, 
         p.personal_email, p.gender, p.birthDate
-      FROM new_idiomas_user u
-      JOIN new_idiomas_person p ON u.person_id = p.id
+      FROM ${userTable} u
+      JOIN ${personTable} p ON u.person_id = p.id
       WHERE u.id = ?
     `,
     args: [id],
@@ -281,7 +282,7 @@ export async function getUserById(id: number): Promise<User | null> {
     const teacherResult = await db.execute({
       sql: `
         SELECT t.id, t.state_id
-        FROM new_idiomas_teacher t
+        FROM ${teacherTable} t
         WHERE t.user_id = ?
       `,
       args: [userRow.id],
@@ -296,8 +297,8 @@ export async function getUserById(id: number): Promise<User | null> {
     const languageResult = await db.execute({
       sql: `
         SELECT l.id, l.name
-        FROM new_idiomas_teacher_language tl
-        JOIN new_idiomas_language l ON l.id = tl.language_id
+        FROM ${teacherLanguageTable} tl
+        JOIN ${languageTable} l ON l.id = tl.language_id
         WHERE tl.teacher_id = ?
       `,
       args: [teacherRow.id],
@@ -325,7 +326,7 @@ export async function getUserById(id: number): Promise<User | null> {
           s.id, s.student_code, s.postgraduate_permanency_id, s.faculty_id, 
           s.postgraduate_program_id, s.postgraduate_enrollment_count, 
           s.postgraduate_admission_year, s.state_id
-        FROM new_idiomas_student s
+        FROM ${studentTable} s
         WHERE s.user_id = ?
       `,
       args: [userRow.id],
@@ -375,8 +376,8 @@ export async function getUser(): Promise<User[]> {
         u.id, u.is_active, u.role_id, p.doc_num, p.doc_type_id, p.names, 
         p.father_last_name, p.mother_last_name, p.nationality_id, p.phone, 
         p.personal_email, p.gender, p.birthDate
-      FROM new_idiomas_user u
-      JOIN new_idiomas_person p ON u.person_id = p.id
+      FROM ${userTable} u
+      JOIN ${personTable} p ON u.person_id = p.id
     `,
     args: [],
   });
@@ -436,7 +437,7 @@ export async function getUser(): Promise<User[]> {
       const teacherResult = await db.execute({
         sql: `
           SELECT t.id, t.state_id
-          FROM new_idiomas_teacher t
+          FROM ${teacherTable} t
           WHERE t.user_id = ?
         `,
         args: [userRow.id],
@@ -448,8 +449,8 @@ export async function getUser(): Promise<User[]> {
         const languageResult = await db.execute({
           sql: `
             SELECT l.id, l.name
-            FROM new_idiomas_teacher_language tl
-            JOIN new_idiomas_language l ON l.id = tl.language_id
+            FROM ${teacherLanguageTable} tl
+            JOIN ${languageTable} l ON l.id = tl.language_id
             WHERE tl.teacher_id = ?
           `,
           args: [teacherRow.id],
@@ -476,7 +477,7 @@ export async function getUser(): Promise<User[]> {
             s.id, s.student_code, s.postgraduate_permanency_id, s.faculty_id, 
             s.postgraduate_program_id, s.postgraduate_enrollment_count, 
             s.postgraduate_admission_year, s.state_id
-          FROM new_idiomas_student s
+          FROM ${studentTable} s
           WHERE s.user_id = ?
         `,
         args: [userRow.id],
@@ -526,7 +527,7 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
     if (userUpdate.docNum || userUpdate.docTypeId || userUpdate.names || userUpdate.fatherLastName || userUpdate.motherLastName || userUpdate.nationalityId || userUpdate.phone || userUpdate.personalEmail || userUpdate.gender || userUpdate.birthDate) {
       await tx.execute({
         sql: `
-          UPDATE new_idiomas_person
+          UPDATE ${personTable}
           SET 
             doc_num = COALESCE(?, doc_num),
             doc_type_id = COALESCE(?, doc_type_id),
@@ -538,7 +539,7 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
             personal_email = COALESCE(?, personal_email),
             gender = COALESCE(?, gender),
             birthDate = COALESCE(?, birthDate)
-          WHERE id = (SELECT person_id FROM new_idiomas_user WHERE id = ?)
+          WHERE id = (SELECT person_id FROM ${userTable} WHERE id = ?)
         `,
         args: [
           userUpdate.docNum || null,
@@ -560,7 +561,7 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
     if (userUpdate.password || userUpdate.roleId || userUpdate.isActive !== undefined) {
       await tx.execute({
         sql: `
-          UPDATE new_idiomas_user
+          UPDATE ${userTable}
           SET 
             password = COALESCE(?, password),
             role_id = COALESCE(?, role_id),
@@ -583,7 +584,7 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
       if (teacherData.stateId) {
         await tx.execute({
           sql: `
-            UPDATE new_idiomas_teacher
+            UPDATE ${teacherTable}
             SET state_id = COALESCE(?, state_id)
             WHERE user_id = ?
           `,
@@ -593,15 +594,15 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
 
       if (teacherData.specializedLanguageIds) {
         await tx.execute({
-          sql: `DELETE FROM new_idiomas_teacher_language WHERE teacher_id = (SELECT id FROM new_idiomas_teacher WHERE user_id = ?)`,
+          sql: `DELETE FROM ${teacherLanguageTable} WHERE teacher_id = (SELECT id FROM ${teacherTable} WHERE user_id = ?)`,
           args: [userId],
         });
 
         for (const languageId of teacherData.specializedLanguageIds) {
           await tx.execute({
             sql: `
-              INSERT INTO new_idiomas_teacher_language (teacher_id, language_id)
-              VALUES ((SELECT id FROM new_idiomas_teacher WHERE user_id = ?), ?)
+              INSERT INTO ${teacherLanguageTable} (teacher_id, language_id)
+              VALUES ((SELECT id FROM ${teacherTable} WHERE user_id = ?), ?)
             `,
             args: [userId, languageId],
           });
@@ -613,7 +614,7 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
 
       await tx.execute({
         sql: `
-          UPDATE new_idiomas_student
+          UPDATE ${studentTable}
           SET 
             student_code = COALESCE(?, student_code),
             postgraduate_permanency_id = COALESCE(?, postgraduate_permanency_id),
