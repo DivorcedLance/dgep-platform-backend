@@ -67,8 +67,6 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
 
     const personId = personResult.rows[0].id;
 
-    console.log(personResult)
-
     // 2. Insertar usuario
     const userResult = await tx.execute({
       sql: `
@@ -81,8 +79,6 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
     });
 
     const userId = userResult.rows[0].id;
-
-    console.log(userResult)
 
     let roleData: TeacherData | StudentData | undefined = undefined;
 
@@ -151,8 +147,6 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
         ],
       });
 
-      console.log(studentResult)
-
       const studentId = studentResult.rows[0].id;
 
       const [postgraduatePermanency, faculty, postgraduateProgram, studentState] = await Promise.all([
@@ -201,11 +195,9 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
       phone: userCreate.phone,
       personalEmail: userCreate.personalEmail,
       gender: userCreate.gender,
-      birthDate: userCreate.birthDate,
+      birthDate: new Date(userCreate.birthDate),
     };
 
-    console.log(baseUser)
-    
     await tx.commit();
 
     if (userCreate.roleId === 2) {
