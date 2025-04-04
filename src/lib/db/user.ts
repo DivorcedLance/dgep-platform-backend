@@ -1,23 +1,23 @@
-import { db } from './db';
-import { getCountry, getCountryById } from './country';
-import { getDocType, getDocTypeById } from './docType';
-import { getFaculty, getFacultyById } from './faculty';
-import { getPostgraduatePermanency, getPostgraduatePermanencyById } from './postgraduatePermanency';
-import { getPostgraduateProgramGroupedByFaculty, getPostgraduateProgramById } from './postgraduateProgram';
-import { getStudentState, getStudentStateById } from './student';
-import { getTeacherState, getTeacherStateById } from './teacher';
-import { getRole, getRoleById } from './role';
-import { PostgraduatePermanency, PostgraduateProgram, StudentData, StudentDataCreate, StudentState } from './types/student';
-import { TeacherData, TeacherDataCreate, TeacherState } from './types/teacher';
-import { UserCreate, User } from './types/user';
-import { UserDetails } from './types/details';
+import { db } from '@/lib/db/db';
+import { getCountry, getCountryById } from '@/lib/db/country';
+import { getDocType, getDocTypeById } from '@/lib/db/docType';
+import { getFaculty, getFacultyById } from '@/lib/db/faculty';
+import { getPostgraduatePermanency, getPostgraduatePermanencyById } from '@/lib/db/postgraduatePermanency';
+import { getPostgraduateProgramGroupedByFaculty, getPostgraduateProgramById } from '@/lib/db/postgraduateProgram';
+import { getStudentState, getStudentStateById } from '@/lib/db/student';
+import { getTeacherState, getTeacherStateById } from '@/lib/db/teacher';
+import { getRole, getRoleById } from '@/lib/db/role';
+import { PostgraduatePermanency, PostgraduateProgram, StudentData, StudentDataCreate, StudentState } from '@/lib/db/types/student';
+import { TeacherData, TeacherDataCreate, TeacherState } from '@/lib/db/types/teacher';
+import { UserCreate, User } from '@/lib/db/types/user';
+import { UserDetails } from '@/lib/db/types/details';
 import { getLanguage } from './language';
-import { DocType } from './types/docType';
-import { Role } from './types/role';
-import { Language } from './types/language';
-import { Country } from './types/country';
-import { Faculty } from './types/faculty';
-import { languageTable, personTable, studentTable, teacherLanguageTable, teacherTable, userTable } from './tables';
+import { DocType } from '@/lib/db/types/docType';
+import { Role } from '@/lib/db/types/role';
+import { Language } from '@/lib/db/types/language';
+import { Country } from '@/lib/db/types/country';
+import { Faculty } from '@/lib/db/types/faculty';
+import { languageTable, personTable, studentTable, teacherLanguageTable, teacherTable, userTable } from '@/lib/db/tables';
 
 export async function getUserDetails(): Promise<UserDetails> {
   const [docTypes, roles, teacherStates, languages, studentStates, countries, faculties, postgraduatePrograms, postgraduatePermanencies] = await Promise.all([
@@ -142,6 +142,7 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
             faculty_id, postgraduate_program_id, postgraduate_enrollment_count,
             postgraduate_admission_year, state_id
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+          RETURNING id
         `,
         args: [
           userId, studentData.studentCode, studentData.postgraduatePermanencyId,
@@ -149,6 +150,8 @@ export async function createUser(userCreate: UserCreate): Promise<User> {
           studentData.postgraduateAdmissionYear, studentData.stateId
         ],
       });
+
+      console.log(studentResult)
 
       const studentId = studentResult.rows[0].id;
 
