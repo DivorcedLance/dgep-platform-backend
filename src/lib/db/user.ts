@@ -644,3 +644,154 @@ export async function updateUser(userId: number, userUpdate: Partial<UserCreate>
     throw error;
   }
 }
+
+export async function getUsersByIds(ids: number[]): Promise<User[]> {
+  const userResult = await db.execute({
+    sql: `
+      SELECT 
+        u.id, u.is_active, u.role_id, p.doc_num, p.doc_type_id, p.names, 
+        p.father_last_name, p.mother_last_name, p.nationality_id, p.phone, 
+        p.personal_email, p.gender, p.birthDate
+      FROM ${userTable} u
+      JOIN ${personTable} p ON u.person_id = p.id
+      WHERE u.id IN (${ids.map(() => '?').join(',')})
+    `,
+    args: ids,
+  });
+
+  const [roles, docTypes, nationalities, faculties, postgraduatePermanencies, postgraduatePrograms, studentStates, teacherStates] = await Promise.all([
+    getRole(),
+    getDocType(),
+    getCountry(),
+    getFaculty(),
+    getPostgraduatePermanency(),
+    getPostgraduateProgramGroupedByFaculty(),
+    getStudentState(),
+    getTeacherState(),
+  ]);
+
+  const roleMap = new Map(roles.map((role) => [role.id, role]));
+  const docTypeMap = new Map(docTypes.map((docType) => [docType.id, docType]));
+  const nationalityMap = new Map(nationalities.map((country) => [country.id, country]));
+  const facultyMap = new Map(faculties.map((faculty) => [faculty.id, faculty]));
+  const postgraduatePermanencyMap = new Map(postgraduatePermanencies.map((item) => [item.id, item]));
+  const postgraduateProgramMap = new Map<number, PostgraduateProgram[]>(
+    Object.entries(postgraduatePrograms).map(([facultyId, programs]) => [Number(facultyId), programs])
+  );
+  const studentStateMap = new Map(studentStates.map((state) => [state.id, state]));
+  const teacherStateMap = new Map(teacherStates.map((state) => [state.id, state]));
+
+  const users: User[] = [];
+
+  for (const userRow of userResult.rows) {
+    const role = roleMap.get(userRow.role_id as number);
+    const docType = docTypeMap.get(userRow.doc_type_id as number);
+    const nationality = nationalityMap.get(userRow.nationality_id as number);
+
+    if (!role || !docType || !nationality) {
+      throw new Error('Error al obtener datos relacionados con el usuario.');
+    }
+
+    const baseUser: Omit<User, 'roleData' | 'role' | 'roleId'> = {
+      id: userRow.id as number,
+      isActive: Boolean(userRow.is_active),
+      docNum: userRow.doc_num as string,
+      docType,
+      names: userRow.names as string,
+      fatherLastName: userRow.father_last_name as string,
+      motherLastName: userRow.mother_last_name as string,
+      nationality,
+      phone: userRow.phone as string,
+      personalEmail: userRow.personal_email as string,
+      gender: userRow.gender as string,
+      birthDate: new Date(userRow.birthDate as string),
+    };
+
+    let roleData: TeacherData | StudentData | undefined = undefined;
+
+    if (userRow.role_id === 2) {
+      // Docente
+      const teacherResult = await db.execute({
+        sql: `
+          SELECT t.id, t.state_id
+          FROM ${teacherTable} t
+          WHERE t.user_id = ?
+        `,
+        args: [userRow.id],
+      });
+
+      if (teacherResult.rows.length > 0) {
+        const teacherRow = teacherResult.rows[0];
+
+        const languageResult = await db.execute({
+          sql: `
+            SELECT l.id, l.name
+            FROM ${teacherLanguageTable} tl
+            JOIN ${languageTable} l ON l.id = tl.language_id
+            WHERE tl.teacher_id = ?
+          `,
+          args: [teacherRow.id],
+        });
+
+        const teacherState = teacherStateMap.get(teacherRow.state_id as number);
+
+        if (teacherState) {
+          roleData = {
+            id: teacherRow.id,
+            state: teacherState,
+            specializedLanguages: languageResult.rows.map((row) => ({
+              id: row.id,
+              name: row.name,
+            })),
+          } as TeacherData;
+        }
+      }
+    } else if (userRow.role_id === 6) {
+      // Estudiante
+      const studentResult = await db.execute({
+        sql: `
+          SELECT 
+            s.id, s.student_code, s.postgraduate_permanency_id, s.faculty_id, 
+            s.postgraduate_program_id, s.postgraduate_enrollment_count, 
+            s.postgraduate_admission_year, s.state_id
+          FROM ${studentTable} s
+          WHERE s.user_id = ?
+        `,
+        args: [userRow.id],
+      });
+
+      if (studentResult.rows.length > 0) {
+        const studentRow = studentResult.rows[0];
+
+        const postgraduatePermanency = postgraduatePermanencyMap.get(studentRow.postgraduate_permanency_id as number);
+        const faculty = facultyMap.get(studentRow.faculty_id as number);
+        const postgraduateProgram = postgraduateProgramMap.get(studentRow.faculty_id as number)?.find(
+          (program) => program.id === studentRow.postgraduate_program_id
+        );
+        const studentState = studentStateMap.get(studentRow.state_id as number);
+
+        if (postgraduatePermanency && faculty && postgraduateProgram && studentState) {
+          roleData = {
+            id: studentRow.id,
+            studentCode: studentRow.student_code,
+            postgraduatePermanency,
+            faculty,
+            postgraduateProgram,
+            postgraduateEnrollmentCount: studentRow.postgraduate_enrollment_count,
+            postgraduateAdmissionYear: studentRow.postgraduate_admission_year,
+            state: studentState,
+          } as StudentData;
+        }
+      }
+    }
+
+    users.push({
+      ...baseUser,
+      role,
+      roleId: userRow.role_id,
+      roleData,
+    } as User);
+  }
+
+  return users;
+}
